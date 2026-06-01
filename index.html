@@ -773,10 +773,10 @@
           }
           
           /* Mobile Calendar & Time Slot Adjustments */
-          #step-9 {
+          #step-10 {
               overflow: hidden; /* Fixed on screen, prevents the whole view from scrolling up */
           }
-          #step-9 .step-content {
+          #step-10 .step-content {
               margin-top: -2vh; /* Moves the entire card slightly up vertically */
               margin-bottom: 0; 
               padding-bottom: 0;
@@ -786,13 +786,13 @@
               flex-direction: column;
           }
           
-          #step-9 .step-content > div {
+          #step-10 .step-content > div {
               flex: 1;
               min-height: 0;
               justify-content: flex-start !important; /* CRITICAL: Pins the calendar permanently to the top, removing the jump jitter */
           }
           
-          #step-9 .step-content .gap-4 {
+          #step-10 .step-content .gap-4 {
               flex: 1;
               min-height: 0;
               justify-content: flex-start !important; /* CRITICAL: Locks the inner wrapper to the top so it never jitters upwards */
@@ -1039,6 +1039,26 @@
       <div class="step-content">
         <div class="question-header">
           <span class="question-number">8</span>
+          <span>What budget range are you considering for this project?</span>
+        </div>
+        <div class="choice-container">
+          <label class="choice-label"><input type="radio" name="budget" value="$500-$1,500" required><span class="choice-letter">A</span><span class="choice-text">$500-$1,500</span></label>
+          <label class="choice-label"><input type="radio" name="budget" value="$1,500-$2,500" required><span class="choice-letter">B</span><span class="choice-text">$1,500-$2,500</span></label>
+          <label class="choice-label"><input type="radio" name="budget" value="$2,500-$3,500" required><span class="choice-letter">C</span><span class="choice-text">$2,500-$3,500</span></label>
+          <label class="choice-label"><input type="radio" name="budget" value="$3,500-$4,500" required><span class="choice-letter">D</span><span class="choice-text">$3,500-$4,500</span></label>
+          <label class="choice-label"><input type="radio" name="budget" value="$5000+" required><span class="choice-letter">E</span><span class="choice-text">$5000+</span></label>
+        </div>
+        <div class="button-wrapper">
+          <button type="button" class="btn-submit next-btn">OK</button>
+          <span class="hint">press <strong>Enter ↵</strong></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="step" id="step-9">
+      <div class="step-content">
+        <div class="question-header">
+          <span class="question-number">9</span>
           <span>Answer the following: </span>
         </div>
         
@@ -1075,7 +1095,7 @@
       </div>
     </div>
 
-    <div class="step" id="step-9">
+    <div class="step" id="step-10">
       <div class="step-content" style="max-width: 900px; width: 100%; padding-top: 0; padding-bottom: 0; margin-top: 0vh; margin-bottom: auto;">
         <div class="flex flex-col items-center justify-start w-full">
           <img src="https://res.cloudinary.com/dobnqmfsg/image/upload/q_auto/f_auto/v1776510599/Untitled_design__3_-removebg-preview_xoxdtc.png" alt="Logo" class="w-16 mb-4 mt-0">
@@ -1132,7 +1152,7 @@
       </div>
     </div>
 
-    <div class="step" id="step-10">
+    <div class="step" id="step-11">
       <div class="step-content text-center flex flex-col items-center">
         <img src="https://res.cloudinary.com/dobnqmfsg/image/upload/q_auto/f_auto/v1776510599/Untitled_design__3_-removebg-preview_xoxdtc.png" alt="Success Logo" class="w-24 mb-6 drop-shadow-sm">
         <h1 class="text-4xl font-light mb-4 text-[var(--accent-color)]">You're all set!</h1>
@@ -1380,7 +1400,7 @@
   // "Go Forward" Navigation Logic (relies on existing validation)
   if (navDownBtn) {
     navDownBtn.addEventListener('click', () => {
-      if (currentStep === 8) return; // Prevent arrow navigation on the Calendar step (forces Book Now)
+      if (currentStep === 9) return; // Prevent arrow navigation on the Calendar step (forces Book Now)
       goToStep(currentStep + 1);
     });
   }
@@ -1442,10 +1462,10 @@
     if (e.key === 'Enter') {
       e.preventDefault(); // Prevent accidental form submission
       
-      // If we are on step 8 (index 7), submit the form to proceed to Calendar
-      if (currentStep === 7) {
+      // If we are on step 9 (index 8), submit the form to proceed to Calendar
+      if (currentStep === 8) {
         document.getElementById('main-form').requestSubmit();
-      } else if (currentStep < 7) {
+      } else if (currentStep < 8) {
         goToStep(currentStep + 1);
       }
     }
@@ -1454,8 +1474,8 @@
   // Handle final submission and slide to Calendar
   document.getElementById('main-form').addEventListener('submit', function(e) {
     e.preventDefault();
-    // Slide to Step 9 (Calendar, which is index 8)
-    goToStep(8); 
+    // Slide to Step 10 (Calendar, which is index 9)
+    goToStep(9); 
     
     // Initialize the calendar assets as it comes into view
     if(window.initTimezones) window.initTimezones();
@@ -1466,8 +1486,8 @@
   // --- CONFIGURATION & SETUP ---
   var SUPABASE_URL = 'https://ikeyqwtrqaqogecvxmiq.supabase.co'; 
   var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlrZXlxd3RycWFxb2dlY3Z4bWlxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM0OTE0NTYsImV4cCI6MjA4OTA2NzQ1Nn0.6Gp5Y8J2T8gzY44gmcYojP8z028T6OVKOzfNT_1cqi8'; 
-  var TARGET_PROFILE_ID = '4dfcb710-1532-4739-ac63-6a48862436f1';
-  var TARGET_PROFILE_ID_2 = '820b8e96-24ef-46ab-abc0-db7539919e60'; // Replace this string with the actual second profile ID
+  var TARGET_PROFILE_ID = 'b64d723a-df63-4447-8ed5-212836ddd659';
+  var TARGET_PROFILE_ID_2 = 'c42e95b9-6619-4f3f-b95d-2d8021451900'; // Replace this string with the actual second profile ID
   var WEBHOOK_URL = 'https://n8n.podcutz.co.uk/webhook/Leadhascoem';
   
   var supabaseInstance = null;
@@ -1935,8 +1955,8 @@
           if (!webhookResponse.ok) throw new Error("Invalid response");
           await webhookResponse.json();
 
-          // Slide to Step 10 (Success Message, index 9)
-          goToStep(9); 
+          // Slide to Step 11 (Success Message, index 10)
+          goToStep(10); 
           
           // Optionally fade out progress bar once finished
           const pBar = document.querySelector('.progress-bar-fill');
